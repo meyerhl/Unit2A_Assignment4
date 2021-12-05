@@ -1,0 +1,66 @@
+/** Implement text based version of Tower of Hanoi. Object of game is to move all
+ * disks from Tower 1 to Tower 3. Only one disk may be moved at a time. Each move
+ * consists of taking upper disk from one stack and placing it on another stack.
+ * 
+ * Needs to show the current state of the towers with current disks for each.
+ */
+
+import java.util.*;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class TowerHanoi2 {
+    public static Stack<Integer>[] tower = new Stack[4]; //use tower Stack throughout class to all methods
+    
+    public static void moveDisk(int n, int a, int b, int c) {  //recursion function
+        if (n > 0) {
+            moveDisk(n - 1, a , c, b);  //call function again (recursion) to move disks
+            int d = tower[a].pop(); //removing top of stack a (Tower A)
+            tower[c].push(d);  //pushing to stack c (Tower C)
+            display();  //display current results after move
+            moveDisk(n - 1, b, a, c);  //call function again (recursion) to move disks
+        }
+    }
+    
+    public static void addDisk(int number) {
+        for (int d = number; d > 0; d--) { // pushes 1 disk until there are no int number left
+            tower[1].push(d);
+        }
+        System.out.println("-------------------------------------");
+        System.out.println("Current position of disks:");
+        display();
+        moveDisk(number, 1, 2, 3);
+    }
+    
+    public static void calcSteps(int exponent) { //calculates number of steps to solve puzzle
+        int number, i, steps = 1, power = 2;
+        for(i=1; i <= exponent; i++) {
+            steps = steps * power;
+        }
+        steps = steps - 1;
+        System.out.println("You chose " + exponent + " disks. I can solve that in " + steps + " moves:");
+        System.out.println();
+    }
+    
+    public static void display() {  //displays current results of towers at initialization and after moves
+        System.out.println("Tower A: " + tower[1]);
+        System.out.println("Tower B: " + tower[2]);
+        System.out.println("Tower C: " + tower[3]);
+        System.out.println("-------------------------------------");
+    }
+    
+    public static void main(String[] args) {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Welcome to Towers of Hanoi. Enter the number of disks in which to play the game.");
+        int userNumber = myObj.nextInt(); // stores user input value as int
+        
+        tower[1] = new Stack<Integer>();  // this is starting tower for all disks
+        tower[2] = new Stack<Integer>();  // this is auxiliary tower for movement
+        tower[3] = new Stack<Integer>();  // this is destination tower for all disks
+        
+        calcSteps(userNumber);  //provides number of steps for solution
+        addDisk(userNumber);   // passing number of disks 
+        
+        
+    }
+}
