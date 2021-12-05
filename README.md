@@ -1,7 +1,7 @@
 # Unit2A_Assignment4
 Stack for Towers of Hanoi Puzzle
 
-Please view the TowerHanoi2_file for the programming code.
+Please view the TowerHanoi2 for the programming code.
 
 The purpose of this project was to implment a text based version of the Towers of Hanoi puzzle. The object
 of the puzzle is to move all disks (undetermined) from a source tower (Tower 1/A) to a destination tower
